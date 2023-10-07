@@ -1,0 +1,99 @@
+---
+title: "Calofood"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Calofood}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(Calofood)
+library(kableExtra)
+library(tibble)
+```
+
+## About the Package
+
+The Calofood package comprises a dataset containing calorie information from popular fast food restaurants. The dataset is sourced from the Tidytuesday repository available on GitHub. This package provides users with a range of functions. Firstly, it includes a Shiny app which is integrated into the package, enabling interactive interactions with users. This app utilizes the dataset to provide valuable insights to users.
+Additionally, the package offers a plot function, allowing users to generate bar plots based on their input, leveraging the data within the package. Lastly, there is a numeric function that facilitates annual compound interest calculations using three essential parameters: principal, rate, and time. This feature enhances the package's versatility by including financial calculations alongside nutritional analysis.
+ 
+## Why use Calofood package?
+
+Calofood is a versatile package that empowers users to conveniently access and scrutinize nutritional data from popular fast-food chains. It provides an intuitive interface for obtaining calorie counts and other nutritional specifics for a diverse range of menu items.
+This package proves valuable for those aiming to maintain a vitamin-rich diet while dining out. Calofood facilitates users in making informed dietary choices by enabling easy access and comparison of nutritional information across various fast-food items available in our package. It equips individuals with the information needed to align with their nutritional goals.
+
+## Data description and Data dictionary
+
+The dataset was loaded from a file named **fastfoodcalories.csv**. Initially, the dataset contained 18 variables, but we introduced 10 additional variables through mathematical computations. These extra variables enhance our data analysis capabilities and improve the accuracy of our final food item recommendations.
+
+The data dictionary in a table format:
+
+```{r}
+
+ffcaldata <- tibble(
+  variable = c("...1", "restaurant", "item", "calories", "cal_fat", "total_fat",
+               "sat_fat",  "trans_fat", "cholesterol", "sodium", "total_carb", "fiber",
+               "sugar", "protein", "vit_a", "vit_c", "calcium", "salad", "carb_percent",
+               "protein_percent", "fiber_percent", "vit_a_percent", "vit_c_percent", 
+               "calcium_percent", "cholesterol_percent", "sugar_percent",
+               "sodium_percent", "sat_fat_percentage"),
+  
+  class = c("double", "character", "character", "double", "double", "double", "double", 
+            "double", "double", "double", "double", "double", "double", "double", 
+            "double", "double", "double", "character", "double", "double", "double", 
+            "double", "double", "double", "double", "double", "double", "double"),
+ 
+  description = c("Row Index", "Restaurant Name", "Food Item", "Calories", "Calories
+                  from Fat", "Total Fat (g)", "Saturated Fat (g)", "Trans Fat (g)",
+                  "Cholesterol (mg)", "Sodium (mg)", "Total Carbohydrates (g)",
+                  "Dietary Fiber (g)", "Sugars (g)", "Protein (g)", "Vitamin A (% DV)",
+                  "VitaminC (% DV)", "Calcium (% DV)", "Salad Type", 
+                  "Carbohydrates (% DV)", "Protein (% DV)", "Fiber (% DV)", 
+                  "Vitamin A (% DV)", "Vitamin C (% DV)", "Calcium (% DV)",
+                  "Cholesterol (% DV)", "Sugars (% DV)", "Sodium (% DV)",
+                  "Saturated Fat (% DV)")
+)
+
+
+kbl(ffcaldata, table.attr = 'data-quarto-disable-processing="true"') |>
+  kable_styling(full_width = FALSE) |>
+  column_spec(1, width = "2cm", border_right = TRUE) |>
+  column_spec(2, width = "2cm", border_right = TRUE) |>
+  column_spec(3, width = "10cm")
+
+```
+
+A glimpse at the dataset:
+
+```{r}
+head(fastfoodcalories)
+```
+
+The functions in the package are as follows:
+
+- `comp_int()` - This numeric function computes the annual compound interest.
+- `run_app()` - This function runs the Shiny app
+- `foodplot()` - Makes the plots for a vitamin rich diet for food recommendations for different fast food restaurants. 
+
+## Using the functions:
+
+```{r num_function}
+comp_int(725000, 3, 2)
+```
+
+```{r shiny, eval = FALSE}
+run_app()
+```
+
+```{r plot-function}
+foodplot("Mcdonalds")
+```
+
